@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP 10</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    background-color: #0c1321;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 140px;
+    background-color: #111727;
+    padding: 24px;
+  }
+  .sidebar .logo img {
+    width: 130px;
+  }
+  .sidebar .navigation ul {
+    list-style: none;
+    margin-top: 20px;
+  }
+  .sidebar .navigation ul li {
+    padding: 10px 0px;
+  }
+  .sidebar .navigation ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+  }
+  .sidebar .navigation ul li a:hover,
+  .sidebar .navigation ul li a:active,
+  .sidebar .navigation ul li a:focus {
+    color: #06e2ff;
+  }
+  .sidebar .navigation ul li a:hover .fa,
+  .sidebar .navigation ul li a:active .fa,
+  .sidebar .navigation ul li a:focus .fa {
+    color: #06e2ff;
+  }
+  .sidebar .navigation ul li .fa {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  .sidebar .navigation ul li a:hover .fa:hover,
+  .sidebar .navigation ul li a:hover .fa:active,
+  .sidebar .navigation ul li a:hover .fa:focus {
+    color: #ffffff;
+  }
+  .sidebar .policies {
+    position: absolute;
+    bottom: 100px;
+  }
+  .sidebar .policies ul {
+    list-style: none;
+  }
+  .sidebar .policies ul li {
+    padding-bottom: 5px;
+  }
+  .sidebar .policies ul li a {
+    color: #b3b3b3;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 10px;
+  }
+  .sidebar .policies ul li a:hover,
+  .sidebar .policies ul li a:active,
+  .sidebar .policies ul li a:focus {
+    text-decoration: underline;
+    color:#06e2ff;
+  }
+  
+  .main-container {
+    margin-left: 245px;
+    margin-bottom: 100px;
+  }
+  
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #0c1321;
+    padding: 14px 30px;
+  }
+  .topbar .prev-next-buttons button {
+    color: #7a7a7a;
+    cursor: not-allowed;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    font-size: 18px;
+    border: 0px;
+    background-color: #12182a;
+    margin-right: 10px;
+  }
+  .topbar .navbar {
+    display: flex;
+    align-items: center;
+  }
+  .topbar .navbar ul {
+    list-style: none;
+  }
+  .topbar .navbar ul li {
+    display: inline-block;
+    margin: 0px 8px;
+    width: 70px;
+  }
+  .topbar .navbar ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .topbar .navbar ul li a:hover,
+  .topbar .navbar ul li a:active,
+  .topbar .navbar ul li a:focus {
+    color: #06e2ff;
+    font-size: 15px;
+  }
+  .topbar .navbar ul li.divider {
+    color: #ffffff;
+    font-size: 26px;
+    margin: 0px 20px;
+    width: auto;
+  }
+  .topbar .navbar button {
+    background-color: #0c1321;
+    outline: 2px solid #06e2ff;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  .topbar .navbar button:hover,
+  .topbar .navbar button:active,
+  .topbar .navbar button:focus {
+    background-color: #0c1321;
+  }
+  #but{
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+  }
+  #but:hover{
+    transform: scale(1.1);
+  }
+  .spotify-playlists {
+    padding: 20px 40px;
+  }
+  .spotify-playlists h2 {
+    color: #fdfdfd;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .spotify-playlists .list {
+    display: flex;
+    gap: 20px;
+    overflow: auto;
+  }
+  .spotify-playlists .list .item {
+    min-width: 140px;
+    width: 160px;
+    padding: 15px;
+    background-color: #111727;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+  }
+  .spotify-playlists .list .item:hover {
+    background-color: #243050;
+  }
+  .spotify-playlists .list .item img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .spotify-playlists .list .item .play {
+    position: relative;
+  }
+  .spotify-playlists .list .item .play .fa {
+    position: absolute;
+    right: 10px;
+    top: -60px;
+    padding: 18px;
+    background-color: #00eeff;
+    border-radius: 100%;
+    opacity: 0;
+    transition: all ease 0.4s;
+  }
+  .spotify-playlists .list .item:hover .play .fa {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+  .spotify-playlists .list .item h4 {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .spotify-playlists .list .item p {
+    color: #989898;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+  .spotify-playlists hr {
+    margin: 70px 0px 0px;
+    border-color: #636363;
+  }
+  
+  .preview {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to right, #481075, #509bf5);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    opacity: .85;
+  }
+  .preview h6 {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  .preview p {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .preview button {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 26px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00a2ff; 
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00eeff; 
+  }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP 10</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="sidebar">
+      <div class="logo">
+        <a href="#">
+          <img src="https://lh3.googleusercontent.com/c0wxErAQLVsuoUnI4x-cZoWoApNNWXsVSDEXstPtvfaBxoP3RjORkk9yNMRi4RNIp0I7DTVrYOCy-w-3AZd8yvFKPVHrXnJfQ2NMsVFI8JeYRIUMurmdw4qWRi0sLx4GozpqAOCYr_SaSbleW3U4zmOUayV09c-PgMSw4dFVY61QpiX4wyewyXLJ7NTTpEBfSVACk-o_bn2urD7F3YCm1HnkC75nsmHI_Ho16LsMb8rWmdeWqfYVNK6EsC3TA68cccd3XEIFkUwJQMB3NxUae8AlhEH9ja6YV8L7XPEj4PDClQPs-5YEiArnMgzXzowFMghfsoLu8a0f5QjKRrNQkeqeiPwW4DUwQe3G9aWI9VwNj08hk11rrtVa7RXHr1QGyca2cd3bjcz-AfF1l1iHm1nDDppQOFzSoO502tr4Ka_K8gNZrHOcLDHhmTP5jbulbNa4XZVOPomMs42_unZkZKbSM3F1_lluezDCCDdRExVCpk0NaTRnyjQLfACCP0WPPqz0o2q139E2Kys61J69ddMb2QwmM1cK8POBINIJOmeV0Solh76RXD81VLORQ3qlPwl4ZWu5-4fxogYQOilLOnxRS__jnROvJWfaYqVoc1B797RCbaVUm5YF6AYNSgpGgJ1kNK1ZIvVbHDfBkGAlsTljXIV3Vv7zABwrd7y0GWA4RzTOJ22QQnSNd3cpBN3gDCar3vJCZ0vuNYzE1tb8UagPloOe88yDUiYJgZ3n9M5PD2vEeVS1hsfrsJpvYoP-JjVUQaTB2TwiIwGCT7cHKzPkhpoR5eddD8a5UK63FFzlXDMKqXuaZGO9p1ZXuI1yytp6IhCcCyduJVgDyeIdbMDqSdC5Ydu-OR5aS9LTNCijFRz7IAfPpsLTXZici1nuobCTvnZCFTyNppiTBkodooNB-IS3-AOMhmkxsyO_k_wG9HVaPhqLRq01_425ScMWzZ7eDwOa5iKMqzAzel1pmNtqWXHN341gqlTZEm9RrZP7h5AKy_4k=w733-h220-no?authuser=0" alt="Logo" />
+        </a>
+      </div>
+
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="fa fa-home"></span>
+              <span>Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="fa fa-search"></span>
+              <span>Search</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="fa fas fa-book"></span>
+              <span>Your Library</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="fa fas fa-plus-square"></span>
+              <span>Create Playlist</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="fa fas fa-heart"></span>
+              <span>Liked Songs</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="policies">
+        <ul>
+          <li>
+            <a href="#">Cookies</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="topbar">
+        <div class="prev-next-buttons">
+          <button type="button" class="fa fas fa-chevron-left"></button>
+          <button type="button" class="fa fas fa-chevron-right"></button>
+        </div>
+
+        <div class="navbar">
+          <ul>
+            <li>
+              <a href="#">Premium</a>
+            </li>
+            <li>
+              <a href="#">Support</a>
+            </li>
+            <li>
+              <a href="#">Download</a>
+            </li>
+            <li class="divider">|</li>
+            <li>
+              <a href="#">Sign Up</a>
+            </li>
+          </ul>
+          <div id="but">
+            <button type="button">Log In</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotify-playlists">
+        <h2>Metal a.k.a Debil Songs</h2>
+
+        <div class="list">
+          <div class="item">
+            <img src="https://crownnote.com/sites/default/files/All_Hope_Is_Gone.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Psychosocial</h4>
+            <p>Artist: Slipknot</p>
+            <p>Release: July 7, 2004</p>
+            <p>Duration: 4:44</p>
+          </div>
+
+          <div class="item">
+            <img src="https://www.sanity.com.au/media/Images/fullimage/478370/SDC_1132126_2018-07-11--00-19-05.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Duality</h4>
+            <p>Artist: Slipknot</p>
+            <p>Release: May 4, 2004</p>
+            <p>Duration: 4:12</p>
+          </div>
+
+          <div class="item">
+            <img src="https://www.whatrecords.co.uk/media/s_products/s_products98249a.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Enter Sandman</h4>
+            <p>Artist: Metallica</p>
+            <p>Release: July 29, 1991</p>
+            <p>Duration: 5:31</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/R.b3771f14dfa8fd61915a6c503a7f9572?rik=E6seSYMSGPvLKQ&riu=http%3a%2f%2ffc05.deviantart.net
+            %2ffs71%2ff%2f2012%2f065%2fb%2f4%2fmaster_of_puppets_3d_album_by_cubicalmember-d4ry641.jpg&ehk=plNNm2IshfY8MQTEB5kpbWtZY6XZX1RDiQyhlmf3MSs%3d&risl=&pid=ImgRaw&r=0" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Master of Puppets</h4>
+            <p>Artist: Metallica</p>
+            <p>Release: March 3, 1996</p>
+            <p>Duration: 8:36</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.JsRMSqUQFVQBBGASExy94QHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Tournado of Souls</h4>
+            <p>Artist: Megadeth</p>
+            <p>Release: September 24, 1990</p>
+            <p>Duration: 5:22</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/R.9053688264e65c43852e568bcd832744?rik=skEo10ik8hK%2fBg&riu=http%3a%2f%2fimage.
+            iheart.com%2fEMI9%2fThumb_Content%2fFull_PC%2fEMI%2fOct12%2f102212%2ftplay_Audio_20121017192120_BO%2f5099997849056%2f5099997849056_1300x1300_300dpi.jpg&ehk=ioInfPNxlC%2bgPj%2fEM%2b7uBYPX55GPNIKpxpMtsY0o0rc%3d&risl=&pid=ImgRaw&r=0" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Symphony of Destruction</h4>
+            <p>Artist: Megadeth</p>
+            <p>Release: July 14, 1992</p>
+            <p>Duration: 4:04</p>
+          </div>
+
+          <div class="item">
+            <img src="https://cdn.albumoftheyear.org/album/114800-iowa-10th-anniversary-edition.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Disasterpiece</h4>
+            <p>Artist: Slipknot</p>
+            <p>Release: August 28, 2001</p>
+            <p>Duration: 5:08</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.XShDjB0ZfGCDZNxHOQKtUQD6D6?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Nightmare</h4>
+            <p>Artist: Avenge Sevenfold</p>
+            <p>Release: July 27, 2010</p>
+            <p>Duration: 6:12</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotify-playlists">
+        <h2>Rap</h2>
+        <div class="list">
+          <div class="item">
+            <img src="https://images.genius.com/7154c6dafd6f6f883c099f033a4aa5e3.1000x1000x1.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Wet Dreamz</h4>
+            <p>Artist: J. Cole</p>
+            <p>Release: December 9, 2014</p>
+            <p>Duration: 4:00</p>
+          </div>
+
+          <div class="item">
+            <img src="https://s.mxmcdn.net/images-storage/albums/2/4/7/4/5/2/14254742_800_800.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Money Tress</h4>
+            <p>Artist: Kendrick Lamar</p>
+            <p>Release: October 22, 2012</p>
+            <p>Duration: 6:27</p>
+          </div>
+
+          <div class="item">
+            <img src="https://images.genius.com/7154c6dafd6f6f883c099f033a4aa5e3.1000x1000x1.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>No Role Modelz</h4>
+            <p>Artist: J. Cole</p>
+            <p>Release: December 9, 2014</p>
+            <p>Duration: 4:53</p>
+          </div>
+
+          <div class="item">
+            <img src="https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_auto,w_1400/fl_lossy,pg_1/rrgyzeu7ucbf5styxkuw/drake-21-savage-her-loss-album-cver?fimg-ssr-default" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Rich Flex</h4>
+            <p>Artist: Drake ft. 21 Savage</p>
+            <p>Release: November 4, 2022</p>
+            <p>Duration: 3:59</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.-MYZo4332CJFZ7fm0LOBEAHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Walk it Talk it</h4>
+            <p>Artist: Migos</p>
+            <p>Release: January 26, 2018</p>
+            <p>Duration: 4:38</p>
+          </div>
+          
+          <div class="item">
+            <img src="https://images.genius.com/b9ee55a53f28aa0ec351725eff120608.1000x1000x1.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Middle Child</h4>
+            <p>Artist: J. Cole</p>
+            <p>Release: January 24, 2019</p>
+            <p>Duration: 3:59</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Jimmy Cooks</h4>
+            <p>Artist: Drake</p>
+            <p>Release: January 17, 2022</p>
+            <p>Duration: 3:38</p>
+          </div>
+
+          <div class="item">
+            <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Hotel Lobby</h4>
+            <p>Artist: Quavo & Takeoff</p>
+            <p>Release: May 19, 2022</p>
+            <p>Duration: 3:25</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotify-playlists">
+        <h2>Randoms</h2>
+        <div class="list">
+          <div class="item">
+            <img src="https://images.genius.com/cfb0a0c2cbe0d910fb06f85f974a0b1b.588x588x1.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>To The Bone</h4>
+            <p>Artist: Pamungkas</p>
+            <p>Release: June 14, 2019</p>
+            <p>Duration: 5:54</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.iDHncynELLiwZ4R7O05IwQHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Leave the Door Open</h4>
+            <p>Artist: Silk Sonic</p>
+            <p>Release: March 5, 2021</p>
+            <p>Duration: 4:02</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.iDHncynELLiwZ4R7O05IwQHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>After Last Night</h4>
+            <p>Artist: Silk Sonic</p>
+            <p>Release: March 5, 2021</p>
+            <p>Duration: 4:09</p>
+          </div>
+
+          <div class="item">
+            <img src="https://images.genius.com/9332f5a513b8dac759e624c0b5d80c2a.700x700x1.jpg" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            <h4>San Francisco Street</h4>
+            <p>Artist: Sun Rai</p>
+            <p>Release: December 14, 2012</p>
+            <p>Duration: 4:25</p>
+          </div>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.evGYp_CYTnuFMuJr94aF1gHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Die For You</h4>
+            <p>Artist: The Weeknd</p>
+            <p>Release: November 25, 2016</p>
+            <p>Duration: 4:21</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.o9A22FDuVlB74qPIZfX3RgHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Blinding Lights</h4>
+            <p>Artist: The Weeknd</p>
+            <p>Release: November 29, 2019</p>
+            <p>Duration: 3:24</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.l0cjoEacZ1U1zY7OTDjBMAHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Save Your Tears</h4>
+            <p>Artist: The Weeknd</p>
+            <p>Release: March 10, 2020</p>
+            <p>Duration: 4:09</p>
+          </div>
+
+          <div class="item">
+            <img src="https://th.bing.com/th/id/OIP.iW62GWiim96SWzGnkGwtUQHaHa?pid=ImgDet&rs=1" />
+            <div class="play">
+              <span class="fa fa-play"></span>
+            </div>
+            <h4>Lunod</h4>
+            <p>Artist: Ben&Ben</p>
+            <p>Release: August 29, 2021</p>
+            <p>Duration: 2:57</p>
+          </div>
+        </div>
+
+        <hr>
+      </div>
+
+      <div class="preview">
+        <div class="text">
+          <h6>By: LANCE JIRO TACSAGON</h6>
+          <p>3.3.2.1 Learning Task 3.1 | My Top Favorite Songs</p>
+        </div>
+        <div class="button">
+          <button type="button">Sign up free</button>
+        </div>
+      </div>
+    </div>
+    <script
+     src="https://kit.fontawesome.com/23cecef777.js"
+    crossorigin="anonymous"
+    ></script>    
+  </body>
+</html>
